@@ -1,0 +1,55 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.tmp
+*.temp
+*.log
+*.bak
+*.swp
+*.swo
+
+# VS Code / EIDE local state
+.vscode/
+EIDE/.vscode/
+EIDE/.cmsis/
+EIDE/build/
+EIDE/*.code-workspace
+
+# Keil MDK build outputs
+MDK-ARM/SewageMachine/
+MDK-ARM/*.uvguix.*
+MDK-ARM/*.htm
+MDK-ARM/*.hex
+MDK-ARM/*.map
+MDK-ARM/*.lnp
+MDK-ARM/*.sct
+MDK-ARM/*.dep
+MDK-ARM/*.crf
+MDK-ARM/*.d
+MDK-ARM/*.o
+MDK-ARM/*.axf
+MDK-ARM/*.elf
+MDK-ARM/*.bin
+MDK-ARM/*.lib
+MDK-ARM/*.iex
+MDK-ARM/*.lst
+MDK-ARM/*.build_log.htm
+
+# Generic build artifacts
+*.o
+*.obj
+*.d
+*.elf
+*.axf
+*.hex
+*.bin
+*.map
+*.lst
+*.dep
+*.crf
+
+# STM32CubeMX / tool generated backups
+*.orig
+*.rej
+
