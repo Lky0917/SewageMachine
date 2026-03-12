@@ -12,6 +12,7 @@ uint8_t g_backward = 0;             // 初始后退状态
 uint8_t g_left = 0;                 // 初始向左清扫状态
 uint8_t g_right = 0;                // 初始向右清扫状态
 uint8_t g_warning_info = 0;         // 初始报警信息
+unsigned long g_dev_worning = 0;    // 涂鸦故障型 DP 位图，默认无故障
 uint8_t g_auto_enable = 0;          // 自动模式使能标志
 uint8_t g_wall_enable = 0;          // 爬墙模式使能标志
 
