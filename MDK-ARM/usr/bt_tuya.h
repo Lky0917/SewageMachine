@@ -28,7 +28,6 @@ extern uint8_t g_backward;
 extern uint8_t g_left;
 extern uint8_t g_right;
 extern uint8_t g_warning_info;
-extern unsigned long g_dev_worning;
 extern uint8_t g_auto_enable;
 extern uint8_t g_wall_enable;
 

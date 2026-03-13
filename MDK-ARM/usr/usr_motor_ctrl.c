@@ -54,19 +54,7 @@ volatile uint8_t g_motor_selftest_busy = 0; // 1=自检中，0=空闲
 
 extern uint8_t g_auto_enable;                   // 自动模式使能标志
 extern uint8_t g_wall_enable;                   // 爬壁模式使能标志
-extern unsigned long g_dev_warning;             // 故障型 DP 位图
 extern volatile unsigned char system_flag_bool; // 系统开关状态
-
-#ifndef DEV_WARNING_L_WALK_OVERLOAD
-#define DEV_WARNING_L_WALK_OVERLOAD (1UL << 0)
-#define DEV_WARNING_L_WALK_WATER_OUT (1UL << 1)
-#define DEV_WARNING_R_WALK_OVERLOAD (1UL << 2)
-#define DEV_WARNING_R_WALK_WATER_OUT (1UL << 3)
-#define DEV_WARNING_L_PUMP_OVERLOAD (1UL << 4)
-#define DEV_WARNING_L_PUMP_WATER_OUT (1UL << 5)
-#define DEV_WARNING_R_PUMP_OVERLOAD (1UL << 6)
-#define DEV_WARNING_R_PUMP_WATER_OUT (1UL << 7)
-#endif
 
 /* 电机控制内部状态 */
 typedef struct
@@ -266,63 +254,37 @@ static void MotorSelfTest_UpdateStats_M34(void)
  */
 static void MotorSelfTest_ReportResult(void)
 {
-    g_dev_warning = 0;
-
     printf("自检结果:\r\n");
     if (s_selftest_stats.m3_min != FLT_MAX)
     {
         if (s_selftest_stats.m3_max >= 5.5f)
-        {
-            g_dev_warning |= DEV_WARNING_L_PUMP_OVERLOAD;
             printf("报警:电机3过载,max=%.2fA\r\n", s_selftest_stats.m3_max);
-        }
         if (s_selftest_stats.m3_min <= 1.0f)
-        {
-            g_dev_warning |= DEV_WARNING_L_PUMP_WATER_OUT;
             printf("报警:电机3出水,min=%.2fA\r\n", s_selftest_stats.m3_min);
-        }
     }
 
     if (s_selftest_stats.m4_min != FLT_MAX)
     {
         if (s_selftest_stats.m4_max >= 5.5f)
-        {
-            g_dev_warning |= DEV_WARNING_R_PUMP_OVERLOAD;
             printf("报警:电机4过载,max=%.2fA\r\n", s_selftest_stats.m4_max);
-        }
         if (s_selftest_stats.m4_min <= 1.0f)
-        {
-            g_dev_warning |= DEV_WARNING_R_PUMP_WATER_OUT;
             printf("报警:电机4出水,min=%.2fA\r\n", s_selftest_stats.m4_min);
-        }
     }
 
     if (s_selftest_stats.left_min != FLT_MAX)
     {
         if (s_selftest_stats.left_max >= 1.2f)
-        {
-            g_dev_warning |= DEV_WARNING_L_WALK_OVERLOAD;
             printf("报警:左行走电机过载,max=%.2fA\r\n", s_selftest_stats.left_max);
-        }
         if (s_selftest_stats.left_min <= 0.5f)
-        {
-            g_dev_warning |= DEV_WARNING_L_WALK_WATER_OUT;
             printf("报警:左行走电机出水,min=%.2fA\r\n", s_selftest_stats.left_min);
-        }
     }
 
     if (s_selftest_stats.right_min != FLT_MAX)
     {
         if (s_selftest_stats.right_max >= 1.2f)
-        {
-            g_dev_warning |= DEV_WARNING_R_WALK_OVERLOAD;
             printf("报警:右行走电机过载,max=%.2fA\r\n", s_selftest_stats.right_max);
-        }
         if (s_selftest_stats.right_min <= 0.5f)
-        {
-            g_dev_warning |= DEV_WARNING_R_WALK_WATER_OUT;
             printf("报警:右行走电机出水,min=%.2fA\r\n", s_selftest_stats.right_min);
-        }
     }
 }
 
